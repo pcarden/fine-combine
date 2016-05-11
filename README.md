@@ -1,80 +1,45 @@
-# Webpack library starter
-
-Webpack based boilerplate for producing libraries (Input: ES6, Output: universal library)
-
-## Features
-
-* Webpack based.
-* ES6 as a source.
-* Exports in a [umd](https://github.com/umdjs/umd) format so your library works everywhere.
-* ES6 test setup with [Mocha](http://mochajs.org/) and [Chai](http://chaijs.com/).
-* Linting with [ESLint](http://eslint.org/).
-
-## Process
-
-```
-ES6 source files
-       |
-       |
-    webpack
-       |
-       +--- babel, eslint
-       |
-  ready to use
-     library
-  in umd format
-```
-
-## Getting started
-
-1. Setting up the name of your library
-  * Open `webpack.config.js` file and change the value of `libraryName` variable.
-  * Open `package.json` file and change the value of `main` property so it matches the name of your library.
-2. Build your library
-  * Run `npm install` to get the project's dependencies
-  * Run `npm run build` to produce minified version of your library.
-3. Development mode
-  * Having all the dependencies installed run `npm run dev`. This command will generate an non-minified version of your library and will run a watcher so you get the compilation on file change.
-4. Running the tests
-  * Run `npm run test`
-
-## Scripts
-
-* `npm run build` - produces production version of your library under the `lib` folder
-* `npm run dev` - produces development version of your library and runs a watcher
-* `npm run test` - well ... it runs the tests :)
-
-## Readings
-
-* [Start your own JavaScript library using webpack and ES6](http://krasimirtsonev.com/blog/article/javascript-library-starter-using-webpack-es6)
-
-## Misc
-
-### An example of using dependencies that shouldn’t be resolved by webpack, but should become dependencies of the resulting bundle
-
-In the following example we are excluding React and Lodash:
-
-```js
-{
-  devtool: 'source-map',
-  output: {
-    path: '...',
-    libraryTarget: 'umd',
-    library: '...'
-  },
-  entry: '...',
-  ...
-  externals: {
-    react: 'react'
-    // Use more complicated mapping for lodash.
-    // We need to access it differently depending
-    // on the environment.
-    lodash: {
-      commonjs: 'lodash',
-      commonjs2: 'lodash',
-      amd: '_',
-      root: '_'
-    }
-  }
-}
-```
+/**
+ *
+███████╗██╗███╗   ██╗███████╗     ██████╗ ██████╗ ███╗   ███╗██████╗ ██╗███╗   ██╗███████╗
+██╔════╝██║████╗  ██║██╔════╝    ██╔════╝██╔═══██╗████╗ ████║██╔══██╗██║████╗  ██║██╔════╝
+█████╗  ██║██╔██╗ ██║█████╗      ██║     ██║   ██║██╔████╔██║██████╔╝██║██╔██╗ ██║█████╗
+██╔══╝  ██║██║╚██╗██║██╔══╝      ██║     ██║   ██║██║╚██╔╝██║██╔══██╗██║██║╚██╗██║██╔══╝
+██║     ██║██║ ╚████║███████╗    ╚██████╗╚██████╔╝██║ ╚═╝ ██║██████╔╝██║██║ ╚████║███████╗
+╚═╝     ╚═╝╚═╝  ╚═══╝╚══════╝     ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝ ╚═╝╚═╝  ╚═══╝╚══════╝
+ *
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ *
+This function returns a single reducer collection, built from the reducer collections passed
+in as arguments, and HANDLES DUPLICATE KEYS by creating new combined reducers for those keys.
+ *
+Reducers are typically organized into collections, where each key in the collection matches a
+branch of the state tree. Sometimes, several such collections may be passed to redux' standard
+combineReducers() function to build the single reducer function used in constructing the store
+with createStore().
+ *
+e.g.
+store = createStore(
+   combineReducers({
+       ...reducerCollection1,
+       ...reducerCollection2,
+       routing: routerReducer
+       }), etc
+ *
+If there is a duplicate key in reducerCollection1 and reducerCollection2, then
+reducerCollection2 will override the function from reducerCollection1.  fineCombine does not
+replace combineReducers - it is used to preprocess reducer collections before they are
+passed to combineReducers.
+ *
+There is no change to the individual reducer functions passed in EXCEPT in the case of
+duplicate keys, a new function is returned under that key which chains together the
+duplicate reducers.  Such functions are identifiable in the returned reducer collection,
+because they have the function name fineCombinedReducer. All other functions will have their
+original name (if they had one).
+ *
+The original use-case for this is combining some autoRedux and some custom reducers. For
+example, in a "teams" collection, some actions may be very generic (OPEN_CREATE_TEAM_DIALOG)
+hence created with autoRedux, while others such as the async fetching of reactive team lists
+may require custom reducers. We still want all the state related to "team" to be in a single
+branch of the state tree, so we need a fineCombine function that doesn't simply overwrite
+conflicting branches when the reducers are combined.
+ */

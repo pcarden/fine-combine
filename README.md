@@ -2,19 +2,21 @@
 
 For use with [Redux](https://github.com/reactjs/redux).  
 
-Allows different reducers for the same state branch to exist in more than one reducer collection.  
+## More granularity and flexibility in combining reducer collections.
+
+Fine Combine allows different reducers for the same state branch to exist in more than one reducer collection.  
 It takes multiple reducer collections as arguments, and returns a merged collection which is a 
 simple aggregation EXCEPT that where a key is present in two or more of the arguments, 
-the reducer functions for that key are combined.
+the reducer functions for that key are combined into a single function.
 
 The returned collection then becomes an argument of the standard Redux combineReducers() function.  
 If combineReducers() is used without fineCombine, duplicate reducers in the different collections
-simply overwrite one another.
+would simply overwrite one another.
 
 The original target use-case is where some reducers are auto generated (e.g. to reduce boilerplate) 
 while others relating to the same branch of the state tree need to be hand coded (e.g. complex async operations).
 
-### Installation
+## Installation
 
 To install and save to dependencies in package.json:
 
@@ -30,7 +32,7 @@ Typical usage:
 var fineCombine = require('fine-combine');
 
 // assume that reducerCollection1 and reducerCollection2 have one or more keys in common
-var fineCombinedReducers = fineCombine (reducerCollection1, reducerCollection2)
+var fineCombinedReducers = fineCombine(reducerCollection1, reducerCollection2)
 
 store = createStore(
   combineReducers({

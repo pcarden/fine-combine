@@ -1,6 +1,6 @@
 {
   "name": "fine-combine",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Combines reducer collections, even when they have duplicate keys",
   "main": "lib/fineCombine.js",
   "scripts": {
@@ -25,17 +25,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/krasimir/webpack-library-starter.git"
+    "url": "https://github.com/pcarden/fine-combine"
   },
   "keywords": [
     "fineCombine",
+    "fine-combine",
     "redux",
     "reducer",
     "combine",
     "combine-reducers",
     "combineReducers",
     "state",
-    "react"
+    "react",
+    "fine combine",
+    "fine"
   ],
   "author": "Philip Carden",
   "license": "MIT",

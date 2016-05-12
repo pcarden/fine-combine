@@ -1,4 +1,4 @@
-<img src='./logo/logo.png' height = "60">
+<img src='https://github.com/pcarden/fine-combine/blob/master/logo/logo.png' height = "60">
 
 For use with [Redux](https://github.com/reactjs/redux). Combines reducer collections, even when they have duplicate keys.
 
@@ -13,7 +13,7 @@ The returned collection then becomes an argument of the standard Redux combineRe
 If combineReducers() is used without fineCombine, duplicate reducers in the different collections
 would simply overwrite one another.
 
-The original target use-case is where some reducers are auto generated (e.g. to reduce boilerplate) 
+The original target use-case is where some reducers are auto generated (e.g. simple state changes) 
 while others relating to the same branch of the state tree need to be hand coded (e.g. complex async operations).
 
 ## Installation

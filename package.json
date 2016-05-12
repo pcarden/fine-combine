@@ -1,7 +1,7 @@
 {
   "name": "fine-combine",
   "version": "0.0.1",
-  "description": "Combine reducer collections, even with duplicate keys",
+  "description": "Combines reducer collections, even when they have duplicate keys",
   "main": "lib/fineCombine.js",
   "scripts": {
     "build": "webpack --mode=build",

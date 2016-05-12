@@ -1,12 +1,12 @@
-# <img src='./logo/logo.png' height = "60">
+<img src='./logo/logo.png' height = "60">
 
-For use with [Redux](https://github.com/reactjs/redux).  
+For use with [Redux](https://github.com/reactjs/redux). Combines reducer collections, even when they have duplicate keys.
 
 ## More flexibility in managing reducer collections.
 
 Fine Combine allows different reducers for the same state branch to exist in more than one reducer collection.  
 It takes multiple reducer collections as arguments, and returns a merged collection that is a simple aggregation 
-of them, **EXCEPT THAT** where a key is present in two or more of the arguments, 
+of them, **EXCEPT THAT** where a key is present in two or more of the original reducer collections, 
 the reducer functions for **that key** are combined into a **single reducer function**.
 
 The returned collection then becomes an argument of the standard Redux combineReducers() function.  

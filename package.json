@@ -28,13 +28,14 @@
     "url": "https://github.com/krasimir/webpack-library-starter.git"
   },
   "keywords": [
-    "webpack",
-    "es6",
-    "starter",
-    "library",
-    "universal",
-    "umd",
-    "commonjs"
+    "fineCombine",
+    "redux",
+    "reducer",
+    "combine",
+    "combine-reducers",
+    "combineReducers",
+    "state",
+    "react"
   ],
   "author": "Philip Carden",
   "license": "MIT",

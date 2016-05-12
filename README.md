@@ -1,13 +1,13 @@
-# <img src='./logo/logo2.png' width = "200">
+# <img src='./logo/logo.png' height = "60">
 
 For use with [Redux](https://github.com/reactjs/redux).  
 
-## TLDR: More granularity and flexibility in combining reducer collections.
+## More flexibility in managing reducer collections.
 
 Fine Combine allows different reducers for the same state branch to exist in more than one reducer collection.  
-It takes multiple reducer collections as arguments, and returns a merged collection which is a 
-simple aggregation EXCEPT that where a key is present in two or more of the arguments, 
-the reducer functions for that key are combined into a single reducer function.
+It takes multiple reducer collections as arguments, and returns a merged collection that is a simple aggregation 
+of them, **EXCEPT THAT** where a key is present in two or more of the arguments, 
+the reducer functions for **that key** are combined into a **single reducer function**.
 
 The returned collection then becomes an argument of the standard Redux combineReducers() function.  
 If combineReducers() is used without fineCombine, duplicate reducers in the different collections
@@ -21,18 +21,20 @@ while others relating to the same branch of the state tree need to be hand coded
 To install and save to dependencies in package.json:
 
 ``` bash
-npm install --save redux
+npm install --save fine-combine
 ```
 
 ## Usage
 
-Typical usage:
+Let's assume you have two reducer collections - reducerCollection1 and reducerCollection2 - that
+have one or more duplicate keys.  Typical usage is as follows:
 
+ES6:
 ```js
-var fineCombine = require('fine-combine');
+import fineCombine from 'fine-combine';
 
 // assume that reducerCollection1 and reducerCollection2 have one or more keys in common
-var fineCombinedReducers = fineCombine(reducerCollection1, reducerCollection2)
+const fineCombinedReducers = fineCombine(reducerCollection1, reducerCollection2);
 
 store = createStore(
   combineReducers({
@@ -40,6 +42,21 @@ store = createStore(
     routing: routerReducer
   })
 )    
+```
+
+ES5:
+```js
+var fineCombine = require('fine-combine');
+
+// assume that reducerCollection1 and reducerCollection2 have one or more keys in common
+var fineCombinedReducers = fineCombine(reducerCollection1, reducerCollection2);
+
+store = createStore(
+  combineReducers({
+    ...fineCombinedReducers,
+    routing: routerReducer
+  })
+)   
 ```
 
 ## How it works
@@ -88,9 +105,3 @@ all code is your original work.
 Copyright (c) 2016, Philip Carden. (MIT License)
 
 See LICENSE for more info.
-
-
-
-
-
- */
